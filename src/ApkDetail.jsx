@@ -33,7 +33,6 @@ const ApkDetail = () => {
             const build_tools_dir = android_home + "/build-tools"
             const files = fs.readdirSync(build_tools_dir)
             files.forEach(function (file, index) {
-
                 var curPath = build_tools_dir + "/" + file;
                 console.log(curPath)
                 if (fs.statSync(curPath).isDirectory()) {
