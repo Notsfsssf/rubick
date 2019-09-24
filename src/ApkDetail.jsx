@@ -1,9 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Grid} from "grommet";
+import styled from 'styled-components';
 
 const ApkDetail = () => {
     const [stdout, setStdOut] = useState("")
     const [hashome, setHasHome] = useState(false)
+    const [apkAreaBackground, setApkAreaBackground] = useState("brand")
+    const OverP = styled.p`
+   overflow:scroll;
+    `
     useEffect(() => {
         const fs = window.require('fs')
         const electron = window.require('electron');
@@ -14,6 +19,7 @@ const ApkDetail = () => {
             setHasHome(true)
     }, [])
     const start1 = (event) => {
+        setApkAreaBackground("brand")
         for (let f of event.dataTransfer.files) {
             if (f.path.split(".")[f.path.split(".").length - 1] !== "apk") {
                 continue
@@ -38,7 +44,8 @@ const ApkDetail = () => {
                         console.log(cmdStr)
                         let workerProcess = exec(cmdStr, {cwd: curPath});
                         workerProcess.stdout.on('data', function (data) {
-                            setStdOut(data)
+                            const array =data.split("\r\n")[0]
+                            setStdOut(array)
                         });
                         workerProcess.stderr.on('data', function (data) {
                             console.log('stderr: ' + data);
@@ -65,13 +72,15 @@ const ApkDetail = () => {
                 ]}
             >
 
-                <Box gridArea="header" background="brand" justify={"center"} align={"center"}>
-                    <Box onDragOver={(event) => {
-                        event.preventDefault()
-                    }} onDrop={start1}> APK</Box>
+                <Box gridArea="header" background={apkAreaBackground} justify={"center"} align={"center"}
+                     onDragOver={(event) => {
+                         event.preventDefault()
+                         setApkAreaBackground("light-5")
+                     }} onDrop={start1}>
+                     APK
                 </Box>
-                <Box gridArea="nav" background="light-5">
-                    <p>{stdout}</p>
+                <Box gridArea="nav" background="light-5" justify={"center"} align={"center"}>
+                    <OverP>{stdout}</OverP>
                 </Box>
             </Grid>
         </>)
