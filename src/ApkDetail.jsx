@@ -43,7 +43,7 @@ const ApkDetail = () => {
                         console.log(cmdStr)
                         let workerProcess = exec(cmdStr, {cwd: curPath});
                         workerProcess.stdout.on('data', function (data) {
-                            const array =data.split("\r\n")[0]
+                            const array = data.split("\r\n")[0]
                             setStdOut(array)
                         });
                         workerProcess.stderr.on('data', function (data) {
@@ -76,7 +76,7 @@ const ApkDetail = () => {
                          event.preventDefault()
                          setApkAreaBackground("light-5")
                      }} onDrop={start1}>
-                     APK
+                    APK
                 </Box>
                 <Box gridArea="nav" background="light-5" justify={"center"} align={"center"}>
                     <OverP>{stdout}</OverP>

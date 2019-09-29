@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter, HashRouter} from "react-router-dom";
+import {createHashHistory} from 'history';
 
-ReactDOM.render(<HashRouter>
+ReactDOM.render(<HashRouter history={createHashHistory()}>
     <App />
 </HashRouter>, document.getElementById('root'));
 

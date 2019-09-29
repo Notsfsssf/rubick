@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Box, Grommet} from "grommet";
+import {Box, Grid, Grommet, Tab, Tabs} from "grommet";
 import * as Themes from "grommet/themes";
-import {Route} from "react-router-dom";
+import {Route, Switch, withRouter} from "react-router-dom";
 import ApkDetail from "./ApkDetail";
+import ImageCut from "./ImageCut";
 
 const theme = {
     global: {
@@ -17,12 +18,21 @@ const theme = {
 };
 const {ipcRenderer, electron} = window.require('electron');
 
-const App = () => {
-
+const App = (props) => {
+    const jumpTo = (url) => {
+        props.history.push(url);
+    }
     return (
-        <Grommet theme={theme} full={true}>
-            <Box fill={true}>
-                <Route path="/" exact component={ApkDetail}/>
+        <Grommet theme={theme} full>
+            <Box fill>
+                <Tabs flex>
+                    <Tab title="Image">
+                        <ImageCut/>
+                    </Tab>
+                    <Tab title="APK">
+                        <ApkDetail/>
+                    </Tab>
+                </Tabs>
             </Box>
         </Grommet>
     );
