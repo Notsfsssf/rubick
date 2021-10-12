@@ -4,7 +4,7 @@
   "private": true,
   "main": "main.js",
   "dependencies": {
-    "electron": "^6.0.6",
+    "electron": "^11.5.0",
     "grommet": "^2.7.8",
     "grommet-icons": "^4.3.0",
     "react": "^16.9.0",
